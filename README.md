@@ -70,6 +70,83 @@ The project structure is as follows:
 
 Before performing the task, you need to set up the development environment.
 
+### Installing Java 17 (Eclipse Temurin)
+
+Java is required for Apache Spark. Java 17 (Eclipse Temurin) is recommended.
+
+#### Windows
+
+1. Download the Java 17 (Eclipse Temurin) installer from the [official website](https://adoptium.net/temurin/releases/?version=17).
+2. Select the `.msi` installer suitable for your system (x64 for 64-bit systems).
+3. Run the installer and follow the on-screen instructions.
+4. After installation, verify Java installation:
+
+   ```powershell
+   java -version
+   ```
+
+   You should see output similar to:
+
+   ```
+   openjdk version "17.x.x" 20xx-xx-xx
+   OpenJDK Runtime Environment Temurin-17.x.x+x (build 17.x.x+x)
+   OpenJDK 64-Bit Server VM Temurin-17.x.x+x (build 17.x.x+x, mixed mode, sharing)
+   ```
+
+#### Linux
+
+1. Add the Adoptium repository:
+
+   ```bash
+   # For Debian/Ubuntu
+   wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo apt-key add -
+   echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
+   sudo apt update
+
+   # For Fedora/RHEL/CentOS
+   sudo dnf install -y https://packages.adoptium.net/artifactory/rpm/centos/$(rpm --eval %{centos_ver})/x86_64/Packages/adoptium-release-$(rpm --eval %{centos_ver})-1.noarch.rpm
+   ```
+
+2. Install Java 17:
+
+   ```bash
+   # For Debian/Ubuntu
+   sudo apt install temurin-17-jdk
+
+   # For Fedora/RHEL/CentOS
+   sudo dnf install temurin-17-jdk
+   ```
+
+3. Verify installation:
+
+   ```bash
+   java -version
+   ```
+
+#### macOS
+
+1. Use Homebrew for installation:
+
+   ```bash
+   brew tap homebrew/cask-versions
+   brew install --cask temurin@17
+   ```
+
+2. Alternatively, download the `.pkg` installer from the [official website](https://adoptium.net/temurin/releases/?version=17).
+
+3. Verify installation:
+
+   ```bash
+   java -version
+   ```
+
+4. If you encounter issues with Java paths, run:
+
+   ```bash
+   echo 'export PATH="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin:$PATH"' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
 ### Creating a Python virtual environment
 
 1. For Windows:
